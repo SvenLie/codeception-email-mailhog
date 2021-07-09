@@ -1,11 +1,15 @@
 {
-    "name": "ericmartel/codeception-email-mailhog",
+    "name": "svenlie/codeception-email-mailhog",
     "description": "Provides test helpers for Codeception when testing email functionality with MailHog",
     "license": "MIT",
     "authors": [
         {
             "name": "Eric Martel",
             "email": "emartel@gmail.com"
+        },
+        {
+            "name": "Sven Liebert",
+            "email": "sven.liebert@telekom.de"
         }
     ],
     "require": {

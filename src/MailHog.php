@@ -53,6 +53,12 @@ class MailHog extends Module
    */
   protected $openedEmail;
 
+    /**
+     * Setting for api version of mailhog
+     * @var string
+     */
+  protected $apiVersion = 'v2';
+
   /**
    * Codeception exposed variables
    *
@@ -103,7 +109,7 @@ class MailHog extends Module
   {
     try
     {
-      $this->mailhog->request('DELETE', '/api/v1/messages');
+      $this->mailhog->request('DELETE', '/api/'. $this->apiVersion . '/messages');
     }
     catch(Exception $e)
     {
@@ -122,7 +128,7 @@ class MailHog extends Module
 
     try
     {
-      $response = $this->mailhog->request('GET', '/api/v1/messages');
+      $response = $this->mailhog->request('GET', '/api/' . $this->apiVersion . '/messages');
       $this->fetchedEmails = json_decode($response->getBody());
     }
     catch(Exception $e)
@@ -278,7 +284,7 @@ class MailHog extends Module
   {
     try
     {
-      $response = $this->mailhog->request('GET', "/api/v1/messages/{$id}");
+      $response = $this->mailhog->request('GET', "/api/{$this->apiVersion}/messages/{$id}");
     }
     catch(Exception $e)
     {
@@ -343,6 +349,22 @@ class MailHog extends Module
     }
     return $emailCc;
   }
+
+    /**
+     * @return string
+     */
+    public function getApiVersion()
+    {
+        return $this->apiVersion;
+    }
+
+    /**
+     * @param string $apiVersion
+     */
+    public function setApiVersion($apiVersion)
+    {
+        $this->apiVersion = $apiVersion;
+    }
 
   /**
    * Get Email BCC
