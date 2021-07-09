@@ -129,7 +129,7 @@ class MailHog extends Module
     try
     {
       $response = $this->mailhog->request('GET', '/api/' . $this->apiVersion . '/messages');
-      $this->fetchedEmails = json_decode($response->getBody());
+      $this->fetchedEmails = json_decode($response->getBody(), true);
     }
     catch(Exception $e)
     {
