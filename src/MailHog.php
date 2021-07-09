@@ -534,8 +534,8 @@ class MailHog extends Module
    */
   static function sortEmailsByCreationDatePredicate($emailA, $emailB)
   {
-    $sortKeyA = $emailA->Content->Headers->Date;
-    $sortKeyB = $emailB->Content->Headers->Date;
+    $sortKeyA = $emailA["Content"]["Headers"]["Date"];
+    $sortKeyB = $emailB["Content"]["Headers"]["Date"];;
     return ($sortKeyA > $sortKeyB) ? -1 : 1;
   }
 }
