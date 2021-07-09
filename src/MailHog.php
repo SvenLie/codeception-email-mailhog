@@ -519,6 +519,7 @@ class MailHog extends Module
    */
   protected function sortEmails($inbox)
   {
+      var_dump($inbox);
     usort($inbox, array($this, 'sortEmailsByCreationDatePredicate'));
   }
 
