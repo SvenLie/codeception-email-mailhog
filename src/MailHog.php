@@ -154,15 +154,15 @@ class MailHog extends Module
         $inbox = array();
 
         foreach ($this->fetchedEmails as $email) {
-            if (strpos($email->Content->Headers->To[0], $address) !== false) {
+            if (strpos($email["Content"]["Headers"]["To"][0], $address) !== false) {
                 array_push($inbox, $email);
             }
 
-            if (isset($email->Content->Headers->Cc) && array_search($address, $email->Content->Headers->Cc)) {
+            if (isset($email["Content"]["Headers"]["Cc"]) && array_search($address, $email["Content"]["Headers"]["Cc"])) {
                 array_push($inbox, $email);
             }
 
-            if (isset($email->Content->Headers->Bcc) && array_search($address, $email->Content->Headers->Bcc)) {
+            if (isset($email["Content"]["Headers"]["Bcc"]) && array_search($address, $email["Content"]["Headers"]["Bcc"])) {
                 array_push($inbox, $email);
             }
         }
@@ -181,7 +181,7 @@ class MailHog extends Module
         $inbox = array();
 
         foreach ($this->fetchedEmails as $email) {
-            if (strpos($email->Content->Headers->To[0], $address) !== false) {
+            if (strpos($email["Content"]["Headers"]["To"][0], $address) !== false) {
                 array_push($inbox, $email);
             }
         }
@@ -200,7 +200,7 @@ class MailHog extends Module
         $inbox = array();
 
         foreach ($this->fetchedEmails as $email) {
-            if (isset($email->Content->Headers->Cc) && array_search($address, $email->Content->Headers->Cc)) {
+            if (isset($email["Content"]["Headers"]["Cc"]) && array_search($address, $email["Content"]["Headers"]["Cc"])) {
                 array_push($inbox, $email);
             }
         }
@@ -219,7 +219,7 @@ class MailHog extends Module
         $inbox = array();
 
         foreach ($this->fetchedEmails as $email) {
-            if (isset($email->Content->Headers->Bcc) && array_search($address, $email->Content->Headers->Bcc)) {
+            if (isset($email["Content"]["Headers"]["Bcc"]) && array_search($address, $email["Content"]["Headers"]["Bcc"])) {
                 array_push($inbox, $email);
             }
         }
@@ -269,7 +269,7 @@ class MailHog extends Module
     }
 
     $email = array_shift($this->unreadInbox);
-    return $this->getFullEmail($email->ID);
+    return $this->getFullEmail($email["ID"]);
   }
 
   /**
