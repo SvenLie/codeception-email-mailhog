@@ -167,7 +167,6 @@ class MailHog extends Module
             }
         }
 
-        var_dump($inbox);
         $this->setCurrentInbox($inbox);
     }
 
