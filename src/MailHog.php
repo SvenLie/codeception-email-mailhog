@@ -284,7 +284,7 @@ class MailHog extends Module
    */
   protected function getEmailSubject($email)
   {
-    return $this->getDecodedEmailProperty($email, $email->Content->Headers->Subject[0]);
+    return $this->getDecodedEmailProperty($email, $email["Content"]["Headers"]["Subject"][0]);
   }
 
   /**
@@ -297,7 +297,7 @@ class MailHog extends Module
    */
   protected function getEmailBody($email)
   {
-    return $this->getDecodedEmailProperty($email, $email->Content->Body);
+    return $this->getDecodedEmailProperty($email, $email["Content"]["Body"]);
   }
 
   /**
@@ -310,7 +310,7 @@ class MailHog extends Module
    */
   protected function getEmailTo($email)
   {
-    return $this->getDecodedEmailProperty($email, $email->Content->Headers->To[0]);
+    return $this->getDecodedEmailProperty($email, $email["Content"]["Headers"]["To"][0]);
   }
 
   /**
@@ -324,8 +324,8 @@ class MailHog extends Module
   protected function getEmailCC($email)
   {
     $emailCc = '';
-    if (isset($email->Content->Headers->Cc)) {
-      $emailCc = $this->getDecodedEmailProperty($email, $email->Content->Headers->Cc[0]);
+    if (isset($email["Content"]["Headers"]["Cc"])) {
+      $emailCc = $this->getDecodedEmailProperty($email, $email["Content"]["Headers"]["Cc"][0]);
     }
     return $emailCc;
   }
@@ -357,8 +357,8 @@ class MailHog extends Module
   protected function getEmailBCC($email)
   {
     $emailBcc = '';
-    if (isset($email->Content->Headers->Bcc)) {
-      $emailBcc = $this->getDecodedEmailProperty($email, $email->Content->Headers->Bcc[0]);
+    if (isset($email["Content"]["Headers"]["Bcc"])) {
+      $emailBcc = $this->getDecodedEmailProperty($email, $email["Content"]["Headers"]["Bcc"][0]);
     }
     return $emailBcc;
   }
@@ -374,13 +374,13 @@ class MailHog extends Module
   protected function getEmailRecipients($email)
   {
     $recipients = [];
-    if (isset($email->Content->Headers->To)) {
+    if (isset($email["Content"]["Headers"]["To"])) {
       $recipients[] = $this->getEmailTo($email);
     }
-    if (isset($email->Content->Headers->Cc)) {
+    if (isset($email["Content"]["Headers"]["Cc"])) {
       $recipients[] = $this->getEmailCC($email);
     }
-    if(isset($email->Content->Headers->Bcc)) {
+    if(isset($email["Content"]["Headers"]["Bcc"])) {
       $recipients[] = $this->getEmailBCC($email);
     }
 
@@ -399,7 +399,7 @@ class MailHog extends Module
    */
   protected function getEmailSender($email)
   {
-    return $this->getDecodedEmailProperty($email, $email->Content->Headers->From[0]);
+    return $this->getDecodedEmailProperty($email, $email["Content"]["Headers"]["From"][0]);
   }
 
   /**
@@ -412,7 +412,7 @@ class MailHog extends Module
    */
   protected function getEmailReplyTo($email)
   {
-    return $this->getDecodedEmailProperty($email, $email->Content->Headers->{'Reply-To'}[0]);
+    return $this->getDecodedEmailProperty($email, $email["Content"]["Headers"]["Reply-To"][0]);
   }
 
   /**
@@ -425,7 +425,7 @@ class MailHog extends Module
    */
   protected function getEmailPriority($email)
   {
-    return $this->getDecodedEmailProperty($email, $email->Content->Headers->{'X-Priority'}[0]);
+    return $this->getDecodedEmailProperty($email, $email["Content"]["Headers"]["X-Priority"][0]);
   }
 
   /**
@@ -436,13 +436,13 @@ class MailHog extends Module
    */
   protected function getDecodedEmailProperty($email, $property) {
     if ((string)$property != '') {
-      if (!empty($email->Content->Headers->{'Content-Transfer-Encoding'}) &&
-        in_array('quoted-printable', $email->Content->Headers->{'Content-Transfer-Encoding'})
+      if (!empty($email["Content"]["Headers"]["Content-Transfer-Encoding"]) &&
+        in_array('quoted-printable', $email["Content"]["Headers"]["Content-Transfer-Encoding"])
       ) {
         $property = quoted_printable_decode($property);
       }
-      if (!empty($email->Content->Headers->{'Content-Type'}[0]) &&
-          strpos($email->Content->Headers->{'Content-Type'}[0], 'multipart/mixed') !== false
+      if (!empty($email["Content"]["Headers"]["Content-Type"][0]) &&
+          strpos($email["Content"]["Headers"]["Content-Type"][0], 'multipart/mixed') !== false
       ) {
           $property = quoted_printable_decode($property);
       }
