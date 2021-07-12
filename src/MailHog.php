@@ -521,7 +521,6 @@ class MailHog extends Module
    */
   protected function sortEmails($inbox)
   {
-      var_dump($inbox);
     usort($inbox, array($this, 'sortEmailsByCreationDatePredicate'));
   }
 
@@ -537,7 +536,7 @@ class MailHog extends Module
   static function sortEmailsByCreationDatePredicate($emailA, $emailB)
   {
     $sortKeyA = $emailA["Content"]["Headers"]["Date"];
-    $sortKeyB = $emailB["Content"]["Headers"]["Date"];;
-    return ($sortKeyA > $sortKeyB) ? -1 : 1;
+    $sortKeyB = $emailB["Content"]["Headers"]["Date"];
+    return ($sortKeyA < $sortKeyB) ? -1 : 1;
   }
 }
