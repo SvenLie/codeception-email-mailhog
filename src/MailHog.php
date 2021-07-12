@@ -271,33 +271,7 @@ class MailHog extends Module
     }
 
     $email = array_shift($this->unreadInbox);
-    var_dump($email);
-    var_dump($email["ID"]);
-    return $this->getFullEmail($email["ID"]);
-  }
-
-  /**
-   * Get Full Email
-   *
-   * Returns the full content of an email
-   *
-   * @param string $id ID from the header
-   * @return mixed Returns a JSON encoded Email
-   */
-  protected function getFullEmail($id)
-  {
-    try
-    {
-        $index = array_search($id,array_column($this->fetchedEmails, 'ID'));
-        var_dump($index != null ? $this->fetchedEmails[$index] : "Null");
-      $response = $this->mailhog->request('GET', "/api/{$this->apiVersion}/messages/{$id}");
-    }
-    catch(Exception $e)
-    {
-      $this->fail('Exception: ' . $e->getMessage());
-    }
-    $fullEmail = json_decode($response->getBody());
-    return $fullEmail;
+    return $email;
   }
 
   /**
