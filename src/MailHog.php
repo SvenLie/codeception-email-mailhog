@@ -271,6 +271,8 @@ class MailHog extends Module
     }
 
     $email = array_shift($this->unreadInbox);
+    var_dump($email);
+    var_dump($email["ID"]);
     return $this->getFullEmail($email["ID"]);
   }
 
