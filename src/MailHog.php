@@ -284,6 +284,8 @@ class MailHog extends Module
   {
     try
     {
+        $index = array_search($id,array_column($this->fetchedEmails, 'ID'));
+        var_dump($index != null ? $this->fetchedEmails[$index] : "Null");
       $response = $this->mailhog->request('GET', "/api/{$this->apiVersion}/messages/{$id}");
     }
     catch(Exception $e)
