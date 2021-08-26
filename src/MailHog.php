@@ -449,7 +449,7 @@ class MailHog extends Module
         $property = mb_decode_mimeheader($property);
       }
     }
-    return $property;
+    return imap_utf8($property);
   }
 
   /**
