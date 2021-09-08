@@ -245,7 +245,7 @@ class MailHog extends Module
    * @param bool $fetchNextUnread Goes to the next Unread Email
    * @return mixed Returns a JSON encoded Email
    */
-  protected function getOpenedEmail($fetchNextUnread = FALSE)
+  public function getOpenedEmail($fetchNextUnread = FALSE)
   {
     if($fetchNextUnread || $this->openedEmail == NULL)
     {
