@@ -281,7 +281,7 @@ class MailHog extends Module
    * @param mixed $email Email
    * @return string Subject
    */
-  protected function getEmailSubject($email)
+  public function getEmailSubject($email)
   {
     return $this->getDecodedEmailProperty($email, $email["Content"]["Headers"]["Subject"][0]);
   }
@@ -294,7 +294,7 @@ class MailHog extends Module
    * @param mixed $email Email
    * @return string Body
    */
-  protected function getEmailBody($email)
+  public function getEmailBody($email)
   {
     return $this->getDecodedEmailProperty($email, $email["Content"]["Body"]);
   }
