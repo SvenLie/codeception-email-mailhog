@@ -23,55 +23,55 @@ class MailHog extends Module
    *
    * @var \GuzzleHttp\Client
    */
-  protected $mailhog;
+  protected \GuzzleHttp\Client $mailhog;
 
   /**
    * Raw email header data converted to JSON
    *
    * @var array
    */
-  protected $fetchedEmails;
+  protected array $fetchedEmails;
 
   /**
    * Currently selected set of email headers to work with
    *
    * @var array
    */
-  protected $currentInbox;
+  protected array $currentInbox;
 
   /**
    * Starts as the same data as the current inbox, but items are removed as they're used
    *
    * @var array
    */
-  protected $unreadInbox;
+  protected array $unreadInbox;
 
   /**
    * Contains the currently open email on which test operations are conducted
    *
    * @var mixed
    */
-  protected $openedEmail;
+  protected mixed $openedEmail;
 
     /**
      * Setting for api version of mailhog
      * @var string
      */
-  protected $apiVersion = 'v2';
+  protected string $apiVersion = 'v2';
 
   /**
    * Codeception exposed variables
    *
    * @var array
    */
-  protected $config = array('url', 'port', 'guzzleRequestOptions', 'deleteEmailsAfterScenario', 'timeout');
+  protected array $config = array('url', 'port', 'guzzleRequestOptions', 'deleteEmailsAfterScenario', 'timeout');
 
   /**
    * Codeception required variables
    *
    * @var array
    */
-  protected $requiredFields = array('url', 'port');
+  protected array $requiredFields = array('url', 'port');
 
   public function _initialize()
   {
